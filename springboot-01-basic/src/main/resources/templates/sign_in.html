@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="规定页面的描述，搜索引擎会把这个描述显示在搜索结果中">
+    <meta name="author" content="规定文档的作者的名字">
+    <meta name="generator" content="规定用于生成文档的一个软件包（不用于手写页面）">
+    <title>登录页面</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.css}">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/static/css/signin.css}">
+
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}" type="image/x-icon">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+</head>
+<body class="text-center">
+    <form class="form-signin" action="/login" method="post">
+        <img class="mb-4" th:src="@{/static/image/bootstrap-solid.svg}" alt="" width="72" height="72"
+             src="../static/image/bootstrap-solid.svg">
+        <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" name="email" class="form-control" th:placeholder="#{login.email}" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" th:placeholder="#{login.password}" required>
+        <div class="checkbox mb-3">
+            <label for="remember-me">
+                <input type="checkbox" value="Remember-me" id="remember-me"> [[#{login.remember}]]
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.button}">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+        <a class="btn btn-sm" href="?locale=zh_CN">中文</a>
+        <a class="btn btn-sm" href="?locale=en_US">English</a>
+    </form>
+</body>
+</html>

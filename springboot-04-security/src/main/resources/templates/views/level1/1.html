@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>首页</title>
+    <!--semantic-ui-->
+    <link th:href="@{/static/css/semantic.css}" rel="stylesheet">
+    <link th:href="@{/static/css/style.css}" rel="stylesheet">
+    <script th:src="@{/static/js/jquery-3.5.1.js}"></script>
+    <script th:src="@{/static/js/semantic.js}"></script>
+</head>
+<body>
+
+    <!--主容器-->
+    <div class="ui container">
+
+        <div th:replace="~{index::nav-menu}"></div>
+
+        <div class="ui segment" style="text-align: center">
+            <h3>Level-1-1</h3>
+        </div>
+
+    </div>
+
+
+</body>
+</html>

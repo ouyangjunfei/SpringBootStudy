@@ -1,0 +1,31 @@
+#application.yml文件有4个可选位置，分别是项目根目录和类路径下（在maven项目中一般是resources文件夹）以及其对应的./config文件夹内
+#优先级: 项目/config > 项目/ > 类路径/config > 类路径/
+
+server:
+  port: 8079
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mybatis?useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 自己配置的，用于测试如何从Java文件读取yaml配置
+    druid:
+      url: jdbc:mysql://localhost:3306/jpa
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+    #profiles:
+    #配置本地开发环境
+    #active: dev
+  mvc:
+    #静态资源路径，默认从根目录下/开始查找，可以修改为自定义路径
+    #加入/static路径可以让html文件中引用的路径被链接到
+    static-path-pattern: /static/**
+  messages:
+    #配置文件的真实位置
+    basename: i18n.login
+mybatis:
+  type-aliases-package: org.example.springboot01basic.pojo
+  mapper-locations: classpath*:sqlMapper/*.xml

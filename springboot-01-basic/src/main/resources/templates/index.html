@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>标题</title>
+</head>
+<body>
+    <h1>首页</h1>
+    <!--保留尖括号原样-->
+    <div th:text="${msg}"></div>
+    <!--会解析为HTML-->
+    <div th:utext="${msg}"></div>
+    <hr>
+    <div>
+        <ul>
+            <li th:each="user:${userList}" th:text="${user}"></li>
+        </ul>
+    </div>
+    <hr>
+    <!--行内与标签写法都可以-->
+    <div>
+        <ul>
+            <li th:each="user:${userList}">[[ ${user} ]]</li>
+        </ul>
+    </div>
+</body>
+</html>

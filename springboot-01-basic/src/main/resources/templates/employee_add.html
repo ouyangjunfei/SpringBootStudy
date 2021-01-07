@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>添加员工</title>
+    <link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/css/dashboard.css}">
+
+</head>
+<body>
+    <div th:replace="commons::navgation"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div th:replace="commons::sidebar"></div>
+        </div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+            <canvas class="my-4 w-100" style="display: none" id="myChart" width="900" height="380"></canvas>
+
+            <form class="form-horizontal col-lg-10 pt-5" action="/user/toAdd" method="post">
+
+                <div class="form-group">
+                    <label for="username" class="col-lg-2 control-label">名称：</label>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" id="username" name="name">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-lg-2 control-label">邮箱：</label>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">性别：</label>
+                    <div class="col-lg-5">
+                        <input type="radio" name="sex" id="female" value="0">
+                        <label for="female">女</label>
+                        <input type="radio" name="sex" id="male" value="0">
+                        <label for="male">男</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="department">部门：</label>
+                    <select class="form-control col-lg-5" id="department" name="department">
+                        <option data-th-each="department : ${departmentList}" th:text="${department.getName()}"
+                                th:value="${department.getId()}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label" for="birth">日期：</label>
+                    <input type="date" class="form-control col-lg-5" name="date" id="birth">
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-4">
+                        <input type="submit" class="btn btn-sm btn-primary" value="提交">
+                    </div>
+                </div>
+            </form>
+
+        </main>
+
+    </div>
+    <script th:src="@{/static/js/jquery-3.5.1.js}"></script>
+    <script>window.jQuery || document.write('<script th:src="@{/static/js/vendor/jquery.slim.min.js}"><\/script>')</script>
+    <script th:src="@{/static/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{/static/js/feather-4.28.0.js}"></script>
+    <script th:src="@{/static/js/Chart.js}"></script>
+    <script th:src="@{/static/js/dashboard.js}"></script>
+</body>
+</html>

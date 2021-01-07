@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>员工</title>
+    <link th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/static/css/dashboard.css}">
+
+</head>
+<body>
+    <div th:replace="commons::navgation"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div th:replace="commons::sidebar"></div>
+        </div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+            <canvas class="my-4 w-100" style="display: none" id="myChart" width="900" height="380"></canvas>
+
+            <h2 class="pt-4">员工情况表</h2>
+
+            <h3><a class="btn btn-sm btn-primary" href="/user/toAdd">添加员工</a></h3>
+
+            <div class="table-responsive pt-3">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>性别</th>
+                        <th>部门</th>
+                        <th>日期</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-th-each="employee : ${employeeList}">
+                        <td data-th-text="${employee.getId()}"></td>
+                        <td data-th-text="${employee.getName()}"></td>
+                        <td data-th-text="${employee.getEmail()}"></td>
+                        <td data-th-text="${employee.getSex()}==0?'女':'男'"></td>
+                        <td data-th-text="${employee.getDepartment().getName()}"></td>
+                        <td data-th-text="${#dates.format(employee.getDate(),'yyyy/MM/dd')}"></td>
+                        <td>
+                            <button class="btn btn-sm btn-primary">编辑</button>
+                            <button class="btn btn-sm btn-danger">删除</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+    </div>
+    <script th:src="@{/static/js/jquery-3.5.1.js}"></script>
+    <script>window.jQuery || document.write('<script th:src="@{/static/js/vendor/jquery.slim.min.js}"><\/script>')</script>
+    <script th:src="@{/static/js/bootstrap.bundle.js}"></script>
+    <script th:src="@{/static/js/feather-4.28.0.js}"></script>
+    <script th:src="@{/static/js/Chart.js}"></script>
+    <script th:src="@{/static/js/dashboard.js}"></script>
+</body>
+</html>

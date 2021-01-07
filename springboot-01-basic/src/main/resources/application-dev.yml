@@ -1,0 +1,11 @@
+#开发环境的配置
+server:
+  port: 8080
+
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/dev
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver

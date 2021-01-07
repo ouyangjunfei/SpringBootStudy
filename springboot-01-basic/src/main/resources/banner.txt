@@ -1,0 +1,10 @@
+
+${AnsiColor.RED}           0000000        0000000        000000             000       0000000000      000         000
+${AnsiColor.GREEN}         000     000    000     00     000    000           000     000        000    000         000
+${AnsiColor.YELLOW}         00       000  000       00   000                   000    000          000   000         000
+${AnsiColor.BRIGHT_BLACK}         00       000  000      000   00  0000              000    000                000         000
+${AnsiColor.BRIGHT_MAGENTA}         000     0000   000    0000   0000    000           000   000                 000         000
+${AnsiColor.BRIGHT_RED}           000000 000     00000  00   000      000          000    000                000         000
+${AnsiColor.BRIGHT_GREEN}                  00            000   00       000          000    000          00    000         000
+${AnsiColor.BRIGHT_MAGENTA}         000     000    00      00     00      00    000    000     0000      0000     000       000
+${AnsiColor.BRIGHT_YELLOW}           0000000       00000000       00000000     000    000       0000000000        0000000000
