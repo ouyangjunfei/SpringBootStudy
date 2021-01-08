@@ -55,14 +55,13 @@
 
 ## 模块与视频章节的对应
 
-外层模块使用Maven管理，但最外层模块并非父模块，只是把所有的模块整合至一个模块下
-
-对外层模块进行的`Lifecycle`也并不会影响到内部的模块，因其没有父子继承关系
+外层模块使用Maven管理，内部SpringBoot模块为其子模块
 
 每一个`springboot-0*-***`都是单独的SpringBoot模块，使用Spring Initializr创建
 
-存在问题：任何一个模块的Build都会导致其他同级别模块同时Build，但并不影响运行和性能
-
+- `shiro-quickstart`
+    - [Apache Shiro](https://shiro.apache.org/index.html) 的快速入门
+    - 简单Java程序，体验认证、授权的流程
 - `springboot-01-basic`
     - P1-P29
     - 员工管理部分整理了MyBatis

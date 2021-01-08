@@ -4,10 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <groupId>org.example</groupId>
     <artifactId>SpringBootLearn</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>springboot-01-basic</module>
+        <module>springboot-02-druid</module>
+        <module>springboot-03-mybatis</module>
+        <module>springboot-04-security</module>
+    </modules>
     <packaging>pom</packaging>
 
     <properties>
