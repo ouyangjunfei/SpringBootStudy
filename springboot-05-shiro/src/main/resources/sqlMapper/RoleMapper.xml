@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.springboot05shiro.dao.RoleMapper">
+    <resultMap id="queryAllRolesResultMap" type="role">
+        <result property="id" column="id"/>
+        <result property="name" column="role_name"/>
+        <collection property="permissions" ofType="string">
+            <result column="permission"/>
+        </collection>
+    </resultMap>
+
+    <select id="queryAllRoles" resultMap="queryAllRolesResultMap">
+        select r.id id, r.role_name role_name, permission
+        from mybatis.roles r,
+             mybatis.roles_permissions rp
+        where r.role_name = rp.role_name
+    </select>
+</mapper>
