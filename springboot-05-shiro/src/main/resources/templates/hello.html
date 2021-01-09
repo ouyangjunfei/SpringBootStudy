@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>你好</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+<!--    <script src="../static/js/jquery-3.5.1.js" th:src="@{/static/js/jquery-3.5.1.js}"></script>-->
+</head>
+<body class="text-center">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 th:text="'认证成功, ' + ${name} + '!'"></h1>
+            </div>
+        </div>
+
+        <div class="row" th:unless="${subject.authenticated}">
+            <div class="col-md-12">
+                <a th:href="@{/login.html}" class="btn btn-primary">登录</a>
+            </div>
+        </div>
+
+
+        <div class="row" th:if="${subject.authenticated}">
+            <div class="col-md-12">
+                <h4 th:text="'Principal: ' + ${subject.principal}"></h4>
+                <form id="logoutForm" th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn btn-danger" value="登出"/>
+                </form>
+            </div>
+        </div>
+
+        <h4><a th:href="@{/account-info}" class="btn btn-primary">账户信息</a>&nbsp;(需要 admin 角色)</h4>
+    </div>
+</body>
+</html>

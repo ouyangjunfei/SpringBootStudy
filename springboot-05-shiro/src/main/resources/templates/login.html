@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>登录</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+<!--    <script src="../static/js/jquery-3.5.1.js" th:src="@{/static/js/jquery-3.5.1.js}"></script>-->
+</head>
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <p th:text="${msg}"></p>
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>用户名</th>
+                        <th>密码</th>
+                        <th>角色</th>
+                        <th>权限</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-th-each="user : ${userList}">
+                        <td data-th-text="${user.getId()}"></td>
+                        <td data-th-text="${user.getUsername()}"></td>
+                        <td data-th-text="${user.getPassword()}"></td>
+                        <td data-th-text="${user.getRoleName()}"></td>
+                        <td data-th-text="${user.getPermission()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                <!--role属性是为了障碍阅读-->
+                <form name="loginform" th:action="@{/login}" method="POST" accept-charset="UTF-8" role="form">
+
+                    <div class="form-group">
+                        <label>
+                            <input class="form-control" placeholder="用户名" name="username" type="text"/>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input class="form-control" placeholder="密码" name="password" type="password" value=""/>
+                        </label>
+                    </div>
+
+                    <input class="btn btn-primary" type="submit" value="Login"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
