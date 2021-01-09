@@ -4,25 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>账户信息</title>
-
     <link href="../static/css/bootstrap.css" th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
-<!--    <script src="../static/js/jquery-3.5.1.js" th:src="@{/static/js/jquery-3.5.1.js}"></script>-->
 </head>
-<body>
+<body class="text-center">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 th:text="'Account Info Page for: ' + ${name} + '!'"></h1>
+                <h1 th:text="'账户信息页面，你是: ' + ${name} + '!'"></h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-1 offset-md-3">
-                <a th:href="@{/}" class="btn btn-primary">Home</a>
+                <a th:href="@{/}" class="btn btn-primary">主页</a>
             </div>
             <div class="col-md-1">
                 <form id="logoutForm" th:action="@{/logout}" method="post">
-                    <input type="submit" class="btn btn-danger" value="Logout"/>
+                    <input type="submit" class="btn btn-danger" value="登出"/>
                 </form>
             </div>
         </div>

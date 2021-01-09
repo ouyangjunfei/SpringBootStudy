@@ -3,6 +3,7 @@ package org.example.springboot05shiro.controller;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
+import org.example.springboot05shiro.service.RoleService;
 import org.example.springboot05shiro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,23 @@ public class LoginController {
 
     private UserService userService;
 
+    private RoleService roleService;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
     }
 
     @GetMapping("/login")
     public ModelAndView loginTemplate(Model model) {
         ModelAndView modelAndView = new ModelAndView("login");
         modelAndView.addObject("userList", userService.queryAllUsers());
+        modelAndView.addObject("roleList", roleService.queryAllRoles());
         return modelAndView;
     }
 
@@ -38,6 +47,8 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 
         try {
+            model.addAttribute("userList", userService.queryAllUsers());
+            model.addAttribute("roleList", roleService.queryAllRoles());
             subject.login(token);
             return "redirect:/";
         } catch (UnknownAccountException uae) {
