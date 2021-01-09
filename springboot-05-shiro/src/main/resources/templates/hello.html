@@ -9,20 +9,48 @@
 <body class="text-center">
     <div class="container">
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-12">
                 <h1 th:text="'认证成功, ' + ${name} + '!'"></h1>
             </div>
         </div>
 
-        <div class="row" th:unless="${subject.authenticated}">
+        <div class="row mt-3" th:unless="${subject.authenticated}">
             <div class="col-md-12">
                 <a th:href="@{/login.html}" class="btn btn-primary">登录</a>
             </div>
         </div>
 
+        <div class="row mt-3" th:if="${subject.authenticated}">
+            <div class="col-md-3">
+                <h3>基于角色的访问控制</h3>
+            </div>
 
-        <div class="row" th:if="${subject.authenticated}">
+            <div class="col-md-3">
+                <a th:href="@{/account-info}" class="btn btn-primary">账户信息</a>&nbsp;(需要 admin 角色)
+            </div>
+
+        </div>
+
+        <div class="row mt-3" th:if="${subject.authenticated}">
+            <div class="col-md-3">
+                <h3>基于权限的访问控制</h3>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/dev/java}" class="btn btn-primary">Java开发</a>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/dev/python}" class="btn btn-primary">Python开发</a>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/dev/doc}" class="btn btn-primary">文档开发</a>
+            </div>
+            <div class="col-md-2">
+                <a th:href="@{/admin/manage}" class="btn btn-primary">后台管理</a>
+            </div>
+        </div>
+
+        <div class="row mt-3" th:if="${subject.authenticated}">
             <div class="col-md-12">
                 <h4 th:text="'Principal: ' + ${subject.principal}"></h4>
                 <form id="logoutForm" th:action="@{/logout}" method="post">
@@ -31,7 +59,6 @@
             </div>
         </div>
 
-        <h4><a th:href="@{/account-info}" class="btn btn-primary">账户信息</a>&nbsp;(需要 admin 角色)</h4>
     </div>
 </body>
 </html>

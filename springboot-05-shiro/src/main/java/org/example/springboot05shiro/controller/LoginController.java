@@ -10,9 +10,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+/**
+ * 登录页面和登录请求
+ * <p>
+ * 两个Service只是用作给前端返回数据展示，不涉及Shiro认证
+ * <p>
+ * 关键认证过程代码为 <code>subject.login(token);</code>
+ */
 @Controller
 public class LoginController {
 

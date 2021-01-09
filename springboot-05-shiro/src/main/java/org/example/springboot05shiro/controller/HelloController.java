@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * 从Shiro examples整合Spring boot的Github源码复制
+ */
 @Controller
 public class HelloController {
 

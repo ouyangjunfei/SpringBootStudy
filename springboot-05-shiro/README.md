@@ -2,17 +2,17 @@
 
 *同时整合 Druid 数据源、MyBatis 框架*
 
-**建议按照介绍顺序整合**
+**整合 Druid 数据源是可选的**
 
-值得一提的是，三个框架并没有依赖关系，所以其实按照任何顺序整合都是可以的
+**整合 MyBatis 框架只是为了登录页面展示数据库的数据**
 
-但此章主要是关于 Shiro 的整合摸索，所以我将首先整合 Shiro
+**三个框架并没有依赖关系，按照任何顺序整合都可以，也可以只整合Shiro**
+
+此章主要是关于 Shiro 的整合摸索，所以我将首先整合 Shiro
 
 ---
 
-## 整合 Shiro
-
-### Shiro 的基本功能和概念
+## Shiro 的基本功能和概念
 
 此部分对应 `shiro-quickstart` 模块
 
@@ -20,11 +20,14 @@
 
 主要参考代码是[Github 样例](https://github.com/apache/shiro/tree/master/samples/quickstart)
 
+也参考[Shiro用starter方式优雅整合到SpringBoot中](https://segmentfault.com/a/1190000014479154)
+
 因为 Shiro 属于开源项目，所以文档的维护并不是很及时与准确
 
 **一定要以最新版的源码为准**
 
 **必须了解的关于安全的概念**
+
 - 基于角色的访问控制
 - 基于权限的访问控制
 - [一个简单样例](https://www.cnblogs.com/zhexiu/p/7816055.html)
@@ -34,7 +37,7 @@
 - **Authentication**：认证、鉴权
 - **Authorization**：授权
 
-### 尝试与Spring Boot整合
+## 尝试与Spring Boot整合
 
 值得一提的是，目前网上的很多整合教程都是导入`shiro-spring`包
 
@@ -44,7 +47,7 @@
 
 导入之后我们还需要进行少量的配置就可以了
 
-### 需要我们配置的部分
+## 需要我们配置的部分
 
 由于安全策略与具体的业务会有联系，就比如说不同的项目所含有的角色和权限定义是完全不同的，所以这部分必定是我们自己配置
 
@@ -54,7 +57,7 @@
 
 目前存在两者需要我们配置的部分
 
-#### Realm
+### Realm
 
 这个词的中文翻译是`领域`，Shiro在 [前面的文档](https://shiro.apache.org/architecture.html) 部分也对其做了解释
 
@@ -67,13 +70,13 @@ Shiro 为我们提供了现成的Realm可以直接使用，本样例中我使用
 在`JdbcRealm`中定义了默认的查询语句，我们根据查询语句建立对应的数据库表
 
 ```java
-protected static final String DEFAULT_AUTHENTICATION_QUERY = "select password from users where username = ?";
+protected static final String DEFAULT_AUTHENTICATION_QUERY="select password from users where username = ?";
 
-protected static final String DEFAULT_SALTED_AUTHENTICATION_QUERY = "select password, password_salt from users where username = ?";
+protected static final String DEFAULT_SALTED_AUTHENTICATION_QUERY="select password, password_salt from users where username = ?";
 
-protected static final String DEFAULT_USER_ROLES_QUERY = "select role_name from user_roles where username = ?";
+protected static final String DEFAULT_USER_ROLES_QUERY="select role_name from user_roles where username = ?";
 
-protected static final String DEFAULT_PERMISSIONS_QUERY = "select permission from roles_permissions where role_name = ?";
+protected static final String DEFAULT_PERMISSIONS_QUERY="select permission from roles_permissions where role_name = ?";
 ```
 
 当然，`JdbcRealm`是支持覆写SQL语句的，你可以用`set***Query`方法覆写内置的SQL语句
@@ -86,13 +89,13 @@ protected static final String DEFAULT_PERMISSIONS_QUERY = "select permission fro
 private DataSource dataSource;
 
 @Autowired
-public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+public void setDataSource(DataSource dataSource){
+    this.dataSource=dataSource;
 }
 
 @Bean
-public Realm realm() {
-    JdbcRealm realm = new JdbcRealm();
+public Realm realm(){
+    JdbcRealm realm=new JdbcRealm();
     realm.setDataSource(dataSource);
     // 基于权限的资源访问默认是关闭的
     realm.setPermissionsLookupEnabled(true);
@@ -102,8 +105,7 @@ public Realm realm() {
 
 那么由于我使用的是自带提供的`JdbcRealm`，所以认证、授权的过程都不用我来具体实现，其还支持加盐功能
 
-
-#### ShiroFilterChainDefinition
+### ShiroFilterChainDefinition
 
 定义完进行认证和授权的 Subject，下一步就是定义应该按照什么样的规则进行认证和授权
 
@@ -119,18 +121,18 @@ Shiro框架支持通过URL或者注解配置认证和授权，这两种方式没
 
 ```java
 @Bean
-public ShiroFilterChainDefinition shiroFilterChainDefinition() {
-    DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
+public ShiroFilterChainDefinition shiroFilterChainDefinition(){
+    DefaultShiroFilterChainDefinition chainDefinition=new DefaultShiroFilterChainDefinition();
     // 登出功能
-    chainDefinition.addPathDefinition("/logout", "logout");
+    chainDefinition.addPathDefinition("/logout","logout");
     // 错误页面无需认证
-    chainDefinition.addPathDefinition("/error", "anon");
+    chainDefinition.addPathDefinition("/error","anon");
     // druid连接池的角色控制，只有拥有admin角色的admin用户可以访问，不理解可以先不管
-    chainDefinition.addPathDefinition("/druid/**", "authc, roles[admin]");
+    chainDefinition.addPathDefinition("/druid/**","authc, roles[admin]");
     // 静态资源无需认证
-    chainDefinition.addPathDefinition("/static/**", "anon");
+    chainDefinition.addPathDefinition("/static/**","anon");
     // 其余资源都需要认证
-    chainDefinition.addPathDefinition("/**", "authc");
+    chainDefinition.addPathDefinition("/**","authc");
     return chainDefinition;
 }
 ```
@@ -140,15 +142,16 @@ public ShiroFilterChainDefinition shiroFilterChainDefinition() {
 1. 减少代码量，不必为每个Controller都写上鉴权规则
 2. 利用注解可以细粒度设置基于角色或者基于资源的权限
 
-##### 基于角色的访问控制
+#### 基于角色的访问控制
 
 现在我们来看这一条规则
 
 ```java
-chainDefinition.addPathDefinition("/druid/**", "authc, roles[admin]");
+chainDefinition.addPathDefinition("/druid/**","authc, roles[admin]");
 ```
 
-由于在配置完Shiro后，我为项目整合了 Druid 数据源，如果你对它不是很了解，建议去查看[Github 文档](https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+由于在配置完Shiro后，我为项目整合了 Druid
+数据源，如果你对它不是很了解，建议去查看[Github 文档](https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
 
 这里无需对 Druid 有很详细的了解，我想阐述的最关键的一点是，当你整合成功 Druid 框架，并且开启了 Web 统计功能 (参考我的`application.yml`)
 
@@ -165,14 +168,14 @@ chainDefinition.addPathDefinition("/druid/**", "authc, roles[admin]");
 在`AccountInfoController`中，有这么一段代码表明这处的资源需要admin角色才能访问
 
 ```java
-    @RequiresRoles("admin")
-    @RequestMapping("/account-info")
-    public String accountInfoTemplate(Model model) {
+@RequiresRoles("admin")
+@RequestMapping("/account-info")
+public String accountInfoTemplate(Model model){
     ...
-    }
+}
 ```
 
-##### 基于权限的访问控制
+#### 基于权限的访问控制
 
 最后，我们来聊Shiro中常用功能同样也很重要的一部分——**Permissions**
 
@@ -182,9 +185,45 @@ chainDefinition.addPathDefinition("/druid/**", "authc, roles[admin]");
 
 诚然，你的系统完全可以只使用基于角色的访问控制，在此样例中就只需要`users`和`user_roles`两张表，然后在Controller使用`@RequiresRoles("role")`注解去指定角色
 
-也可以只使用基于权限的访问控制 (依然需要角色，但是不再通过角色控制访问)，在此样例中需要`users`、`user_roles`和`roles_permissions`三张表，然后在Controller使用`@RequiresPermissions("perm")`注解去指定权限
+也可以只使用基于权限的访问控制 (依然需要角色，但是不再通过角色控制访问)，在此样例中需要`users`、`user_roles`和`roles_permissions`
+三张表，然后在Controller使用`@RequiresPermissions("perm")`注解去指定权限
 
 这一部分关于如何设计以及谁优谁劣先暂且不讨论，因为我也不知道
 
 此处先把 Shiro 的 Permissions 样例展示一下
 
+**首先查看角色和权限对应的关系**
+
+|#|角色|权限|
+|---|---|---|
+|1|admin|manage:*|
+|2|访客|read:*|
+|3|java开发|read:*|
+|4|java开发|dev:java|
+|5|python开发|read:*|
+|6|python开发|dev:python|
+
+也可以参考进入的`/login`页面提供的信息
+
+- admin角色拥有所有的`管理权限`
+- 访客只有`查看文档的权限`
+- java开发可以`查看文档`和进行`java代码开发`
+- python开发可以`查看文档`和进行`python代码开发`
+
+**再查看用户和角色对应的关系**
+
+|#|用户|角色|
+|---|---|---|
+|1|admin|admin|
+|2|andy67123|访客|
+|3|admin|java开发|
+|4|admin|python开发|
+|5|java|java开发|
+|6|python|python开发|
+
+- admin用户拥有`admin`、`java开发`和`python开发`三种角色
+- andy67123用户拥有`访客`角色
+- java用户拥有`java开发`角色
+- python用户拥有`python开发`角色
+
+请试一试登录完成后，在主页点击各个按钮的结果，是否实现了各资源的权限控制

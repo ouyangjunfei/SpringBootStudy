@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>[[${title}]]开发</title>
+    <link href="../static/css/bootstrap.css" th:href="@{/static/css/bootstrap.css}" rel="stylesheet">
+</head>
+<body class="text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 th:text="${msg}"></h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1 offset-md-3">
+                <a th:href="@{/}" class="btn btn-primary">主页</a>
+            </div>
+            <div class="col-md-1">
+                <form id="logoutForm" th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn btn-danger" value="登出"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
