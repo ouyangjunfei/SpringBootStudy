@@ -3,3 +3,11 @@ server:
 spring:
   profiles:
     active: dev
+  mail:
+    username: xxx@163.com
+    password: xxx
+    host: smtp.163.com
+    test-connection: true
+logging:
+  level:
+    org.example: debug
