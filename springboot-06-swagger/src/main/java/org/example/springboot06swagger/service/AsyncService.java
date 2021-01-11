@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AsyncService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AsyncService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncService.class);
 
     /**
      * 模拟发送邮件过程
@@ -20,6 +20,6 @@ public class AsyncService {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        logger.info("邮件已经发送");
+        LOGGER.info("邮件已经发送");
     }
 }
