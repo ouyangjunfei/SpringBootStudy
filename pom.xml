@@ -20,6 +20,7 @@
         <module>springboot-03-mybatis</module>
         <module>springboot-04-security</module>
         <module>springboot-05-shiro</module>
+        <module>springboot-06-swagger</module>
     </modules>
     <packaging>pom</packaging>
 

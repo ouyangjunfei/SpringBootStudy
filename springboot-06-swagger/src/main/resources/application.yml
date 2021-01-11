@@ -1,0 +1,5 @@
+server:
+  port: 8079
+spring:
+  profiles:
+    active: dev
