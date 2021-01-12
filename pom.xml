@@ -21,6 +21,7 @@
         <module>springboot-04-security</module>
         <module>springboot-05-shiro</module>
         <module>springboot-06-swagger</module>
+        <module>springboot-07-dubbo</module>
     </modules>
     <packaging>pom</packaging>
 

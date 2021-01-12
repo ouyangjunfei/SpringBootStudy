@@ -78,3 +78,11 @@
 - `springboot-05-shiro`
     - P38-P45
     - 这部分的说明文档请查看[这里](./springboot-05-shiro/README.md)，略有点复杂
+- `springboot-06-swagger`
+    - P47-P53
+    - 包含Swagger集成、异步任务、邮件任务、定时任务集成
+    - Swagger使用最新的`springfox-boot-starter`v3.0.0依赖
+- `springboot-07-dubbo`
+    - P56-P60
+    - 包含三个子模块`dubbo-consumer`、`dubbo-provider`和`dubbo-same-api`
+    - 具体文档参考[这里](./springboot-07-dubbo/README.md)
