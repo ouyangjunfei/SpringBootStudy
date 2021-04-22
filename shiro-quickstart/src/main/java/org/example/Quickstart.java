@@ -57,7 +57,7 @@ public class Quickstart {
         Session session = currentUser.getSession();
         session.setAttribute("someKey", "aValue");
         String value = (String) session.getAttribute("someKey");
-        if (value.equals("aValue")) {
+        if ("aValue".equals(value)) {
             log.info("Retrieved the correct value! [" + value + "]");
         }
 

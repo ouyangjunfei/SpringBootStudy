@@ -38,13 +38,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-th-each="employee : ${employeeList}">
-                        <td data-th-text="${employee.getId()}"></td>
-                        <td data-th-text="${employee.getName()}"></td>
-                        <td data-th-text="${employee.getEmail()}"></td>
-                        <td data-th-text="${employee.getSex()}==0?'女':'男'"></td>
-                        <td data-th-text="${employee.getDepartment().getName()}"></td>
-                        <td data-th-text="${#dates.format(employee.getDate(),'yyyy/MM/dd')}"></td>
+                    <tr th:each="employee : ${employeeList}">
+                        <td th:text="${employee.getId()}"></td>
+                        <td th:text="${employee.getName()}"></td>
+                        <td th:text="${employee.getEmail()}"></td>
+                        <td th:text="${employee.getSex()}==0?'女':'男'"></td>
+                        <td th:text="${employee.getDepartment().getName()}"></td>
+                        <td th:text="${#dates.format(employee.getDate(),'yyyy/MM/dd')}"></td>
                         <td>
                             <button class="btn btn-sm btn-primary">编辑</button>
                             <button class="btn btn-sm btn-danger">删除</button>

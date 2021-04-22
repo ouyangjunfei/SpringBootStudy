@@ -13,7 +13,10 @@
     <hr>
     <div>
         <ul>
-            <li th:each="user:${userList}" th:text="${user}"></li>
+            <!--HTML标准注释-->
+            <!--/*这部分会被抹去*/-->
+            <!--三元表达式，可以省略第二种情况，如果为假则返回null-->
+            <li th:each="user:${userList}" th:text="${user}" th:classappend="${user.charAt(1)}? 'single'"></li>
         </ul>
     </div>
     <hr>
