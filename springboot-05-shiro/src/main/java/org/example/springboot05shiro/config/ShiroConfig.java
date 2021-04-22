@@ -1,5 +1,6 @@
 package org.example.springboot05shiro.config;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
@@ -43,5 +44,10 @@ public class ShiroConfig {
         // 其余资源都需要认证
         chainDefinition.addPathDefinition("/**", "authc");
         return chainDefinition;
+    }
+
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 }
