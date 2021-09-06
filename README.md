@@ -1,4 +1,4 @@
-# SpringMVC学习记录
+# Spring Boot 学习记录
 
 *参考视频*
 
